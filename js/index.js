@@ -1,29 +1,29 @@
 time_setting = 30;
 random_setting = 100;
+input_text = "testing unused";
 target_setting = $("#output");
-StringType(input_text, target_setting, 0, time_setting, random_setting);
+type(input_text, target_setting, 0, time_setting, random_setting);
 
-var character_length = 100;
-var index = 0;
-var letters = $("#input_text").val();
-var started = false;
-var current_string = letters.substring(index, index + character_length);
-var wordcount = 0;
-
-function StringType(input, target, current, time, random) {
+function type(input, target, current, time, random) {
     if (current > input.length) {
     }
     else {
         current += 1;
-        target.text(input.substring(0, current));// get all the string from input window
+        // fill the target with a substring, from the 0th character to the current one
+        target.text(input.substring(0, current));
         setTimeout(function () {
-            StringType(input, target, current, time, random);//Ricersive call untill string persist
+            type(input, target, current, time, random);
         }, time + Math.random() * random);
     }
 }
 
+var character_length = 2000;
+var index = 0;
+var letters = $("#input_text").val();
+var started = false;
+var current_string = letters.substring(index, index + character_length);
 
-
+var wordcount = 0;
 
 $("html, body").click(function () {
     $("#textarea").focus();
@@ -72,8 +72,8 @@ var errors = 0;
 var interval_timer;
 
 
-$("#pause").click(function () {
-    stop();
+$("#change").click(function () {
+    $("#input_text").show().focus();
 });
 
 
@@ -90,10 +90,6 @@ function stop() {
     clearInterval(interval_timer);
     started = false;
 }
-
-
-
 function finished() {
-    alert("Your typing test are completed.");
+    alert("Your test are finished");
 }
-
